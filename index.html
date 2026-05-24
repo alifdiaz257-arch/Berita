@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOMPASrentan - Portal Berita Uji Hack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        /* Header Kompas style */
+        .top-header {
+            background: #0a0a0a;
+            color: white;
+            font-size: 11px;
+            padding: 8px 0;
+            text-align: center;
+        }
+        .main-header {
+            background: white;
+            border-bottom: 4px solid #c00000;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+        }
+        .logo span {
+            color: #c00000;
+        }
+        .tagline {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        nav {
+            background: #c00000;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .search-box {
+            margin-left: auto;
+        }
+        .search-box input {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            width: 200px;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .headline {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .headline img {
+            width: 100%;
+            height: auto;
+        }
+        .article-list {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .article-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .login-form, .comment-box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+        }
+        button {
+            background: #c00000;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+        .vuln-badge {
+            background: #ff0;
+            color: #000;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+        footer {
+            background: #0a0a0a;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 12px;
+        }
+        .hack-warning {
+            background: #000;
+            color: #0f0;
+            text-align: center;
+            padding: 5px;
+            font-family: monospace;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hack-warning">
+        ⚠️ [SHINRA TENSEI] WEBSITE INI UNTUK UJI HACK - TIDAK ADA KEAMANAN ⚠️
+    </div>
+    <div class="top-header">
+        INDONESIA TERKINI | POLITIK | EKONOMI | OLAHRAGA | TEKNOLOGI
+    </div>
+    <div class="main-header">
+        <div class="container">
+            <div class="logo">KOMPAS<span>rentan</span></div>
+            <div class="tagline">Jurnalisme Tanpa Filter - Edisi Uji Hack</div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="?page=home">HOME</a></li>
+                <li><a href="?page=politik">POLITIK</a></li>
+                <li><a href="?page=ekonomi">EKONOMI</a></li>
+                <li><a href="?page=teknologi">TEKNOLOGI</a></li>
+                <li><a href="?page=admin">ADMIN PANEL</a></li>
+                <li><a href="upload.html">UPLOAD SHELL</a></li>
+                <li class="search-box">
+                    <form action="search.php" method="GET">
+                        <input type="text" name="q" placeholder="Cari berita... (XSS here!)">
+                        <button type="submit">Cari</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="headline" id="content-area">
+                <?php
+                // INI RENTAN PATH TRAVERSAL
+                $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+                $allowed = ['home', 'politik', 'ekonomi', 'teknologi'];
+                // SENGGA DIBIKIN PATH TRAVERSAL - BISA BACA /etc/passwd
+                if(in_array($page, $allowed) || strpos($page, '..') !== false) {
+                    include($page . '.php');
+                } else {
+                    echo "<h1>404 - Halaman gak ketemu tai!</h1>";
+                }
+                ?>
+            </div>
+            <div class="sidebar">
+                <h3>🔥 LOGIN ADMIN (SQL INJECT HERE)</h3>
+                <div class="login-form">
+                    <form action="login.php" method="POST">
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password">
+                        <button type="submit">LOGIN</button>
+                    </form>
+                    <p style="font-size:11px; color:#999;">Hint: pakai <code>' or '1'='1</code> ya bangsat</p>
+                </div>
+
+                <h3 style="margin-top:30px">💬 KOMENTAR (XSS ZONE)</h3>
+                <div class="comment-box">
+                    <form action="comment.php" method="POST">
+                        <input type="text" name="name" placeholder="Nama">
+                        <textarea name="comment" rows="3" placeholder="Komentar... (bisa masukin script)"></textarea>
+                        <button type="submit">Kirim</button>
+                    </form>
+                </div>
+                <div id="comments">
+                    <?php include('comments_display.php'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 KOMPASrentan - Portal Uji Penetrasi Testing<br>
+        Dibuat oleh SHINRA TENSEI - DARK MEDIA | BOT BY ANGGA GANTENG ACUUU
+    </footer>
+</body>
+</html>
