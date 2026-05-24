@@ -2,224 +2,597 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOMPASrentan - Portal Berita Uji Hack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>KOMPASrentan - Portal Berita Uji Hack | By Alifdiaz</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
+            overflow-x: hidden;
+            width: 100%;
         }
-        /* Header Kompas style */
+
+        /* Container utama biar ga geser */
+        .wrapper {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
         .top-header {
             background: #0a0a0a;
-            color: white;
+            color: #ccc;
             font-size: 11px;
             padding: 8px 0;
             text-align: center;
+            letter-spacing: 1px;
+            overflow-x: auto;
+            white-space: nowrap;
         }
+
         .main-header {
             background: white;
             border-bottom: 4px solid #c00000;
             padding: 20px 0;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+
         .logo {
             font-size: 42px;
             font-weight: bold;
             font-family: 'Times New Roman', serif;
+            color: #1a1a1a;
         }
+
         .logo span {
             color: #c00000;
         }
+
         .tagline {
             font-size: 12px;
-            color: #666;
+            color: #888;
             margin-top: 5px;
         }
+
+        /* Navigation - responsive */
         nav {
             background: #c00000;
-            padding: 10px 0;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
         nav ul {
             list-style: none;
             display: flex;
-            gap: 25px;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
         }
+
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
+
         .search-box {
             margin-left: auto;
         }
-        .search-box input {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            width: 200px;
+
+        .search-box form {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
         }
+
+        .search-box input {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 30px;
+            width: 200px;
+            outline: none;
+        }
+
+        .search-box button {
+            background: #ffcc00;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Main layout - responsive grid */
         .main-content {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 30px;
-            margin: 30px 0;
+            margin: 40px 0;
         }
+
+        /* Headline */
         .headline {
             background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+
         .headline img {
             width: 100%;
             height: auto;
+            max-height: 400px;
+            object-fit: cover;
         }
-        .article-list {
+
+        .headline-content {
+            padding: 25px;
+        }
+
+        .headline-category {
+            color: #c00000;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .headline h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .headline p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Article grid */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .article-card {
             background: white;
-            padding: 20px;
-            border-radius: 5px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
         }
-        .article-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
+
+        .article-card:hover {
+            transform: translateY(-3px);
         }
-        .sidebar {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .login-form, .comment-box {
-            background: #f9f9f9;
-            padding: 15px;
-            margin-top: 20px;
-            border: 1px solid #ddd;
-        }
-        input, textarea {
+
+        .article-card img {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
+            height: 180px;
+            object-fit: cover;
         }
-        button {
+
+        .article-card-content {
+            padding: 15px;
+        }
+
+        .article-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .article-card .date {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-widget h3 {
+            font-size: 18px;
+            border-left: 4px solid #c00000;
+            padding-left: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* CAROUSEL / TEKS SLIDE */
+        .breaking-news {
+            background: #1a1a1a;
+            color: #ffcc00;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .breaking-news .label {
+            display: inline-block;
+            background: #c00000;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .breaking-news .slide-text {
+            display: inline-block;
+            animation: slideText 20s linear infinite;
+            font-size: 14px;
+        }
+
+        @keyframes slideText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Form styling */
+        .login-form input, .login-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .login-form button {
             background: #c00000;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
+            width: 100%;
+            font-weight: bold;
         }
+
+        .popular-news li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            list-style: none;
+        }
+
+        .popular-news li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .comment-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comment-name {
+            font-weight: bold;
+            color: #c00000;
+            font-size: 13px;
+        }
+
         .vuln-badge {
-            background: #ff0;
+            background: #ffcc00;
             color: #000;
             font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 3px;
-            margin-left: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
         }
+
         footer {
-            background: #0a0a0a;
-            color: #666;
+            background: #1a1a1a;
+            color: #888;
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
+            padding: 30px;
+            margin-top: 40px;
             font-size: 12px;
         }
+
         .hack-warning {
             background: #000;
             color: #0f0;
             text-align: center;
-            padding: 5px;
+            padding: 8px;
             font-family: monospace;
             font-size: 11px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0 15px;
+            }
+            .logo {
+                font-size: 32px;
+            }
+            nav ul {
+                justify-content: center;
+            }
+            .search-box {
+                margin-left: 0;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .search-box form {
+                width: 100%;
+            }
+            .search-box input {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .headline h1 {
+                font-size: 20px;
+            }
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hack-warning">
-        ⚠️ [SHINRA TENSEI] WEBSITE INI UNTUK UJI HACK - TIDAK ADA KEAMANAN ⚠️
-    </div>
-    <div class="top-header">
-        INDONESIA TERKINI | POLITIK | EKONOMI | OLAHRAGA | TEKNOLOGI
-    </div>
-    <div class="main-header">
-        <div class="container">
-            <div class="logo">KOMPAS<span>rentan</span></div>
-            <div class="tagline">Jurnalisme Tanpa Filter - Edisi Uji Hack</div>
+    <div class="wrapper">
+        <div class="hack-warning">
+            ⚠️ [PORTAL UJI HACK] WEBSITE INI UNTUK PENETRATION TESTING - SEMUA RENTAN ⚠️
         </div>
-    </div>
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="?page=home">HOME</a></li>
-                <li><a href="?page=politik">POLITIK</a></li>
-                <li><a href="?page=ekonomi">EKONOMI</a></li>
-                <li><a href="?page=teknologi">TEKNOLOGI</a></li>
-                <li><a href="?page=admin">ADMIN PANEL</a></li>
-                <li><a href="upload.html">UPLOAD SHELL</a></li>
-                <li class="search-box">
-                    <form action="search.php" method="GET">
-                        <input type="text" name="q" placeholder="Cari berita... (XSS here!)">
-                        <button type="submit">Cari</button>
-                    </form>
-                </li>
-            </ul>
+        <div class="top-header">
+            INDONESIA TERKINI | POLITIK | EKONOMI | OLAHRAGA | TEKNOLOGI | INTERNASIONAL
         </div>
-    </nav>
-
-    <div class="container">
-        <div class="main-content">
-            <div class="headline" id="content-area">
-                <?php
-                // INI RENTAN PATH TRAVERSAL
-                $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-                $allowed = ['home', 'politik', 'ekonomi', 'teknologi'];
-                // SENGGA DIBIKIN PATH TRAVERSAL - BISA BACA /etc/passwd
-                if(in_array($page, $allowed) || strpos($page, '..') !== false) {
-                    include($page . '.php');
-                } else {
-                    echo "<h1>404 - Halaman gak ketemu tai!</h1>";
-                }
-                ?>
-            </div>
-            <div class="sidebar">
-                <h3>🔥 LOGIN ADMIN (SQL INJECT HERE)</h3>
-                <div class="login-form">
-                    <form action="login.php" method="POST">
-                        <input type="text" name="username" placeholder="Username">
-                        <input type="password" name="password" placeholder="Password">
-                        <button type="submit">LOGIN</button>
-                    </form>
-                    <p style="font-size:11px; color:#999;">Hint: pakai <code>' or '1'='1</code> ya bangsat</p>
-                </div>
-
-                <h3 style="margin-top:30px">💬 KOMENTAR (XSS ZONE)</h3>
-                <div class="comment-box">
-                    <form action="comment.php" method="POST">
-                        <input type="text" name="name" placeholder="Nama">
-                        <textarea name="comment" rows="3" placeholder="Komentar... (bisa masukin script)"></textarea>
-                        <button type="submit">Kirim</button>
-                    </form>
-                </div>
-                <div id="comments">
-                    <?php include('comments_display.php'); ?>
-                </div>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">KOMPAS<span>rentan</span></div>
+                <div class="tagline">Jurnalisme Tanpa Filter - Portal Uji Coba Hacking</div>
             </div>
         </div>
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="?page=home">HOME</a></li>
+                    <li><a href="?page=politik">POLITIK</a></li>
+                    <li><a href="?page=ekonomi">EKONOMI</a></li>
+                    <li><a href="?page=teknologi">TEKNOLOGI</a></li>
+                    <li><a href="?page=olahraga">OLAHRAGA</a></li>
+                    <li><a href="?page=admin">ADMIN</a></li>
+                    <li><a href="upload.html">UPLOAD</a></li>
+                    <li class="search-box">
+                        <form action="search.php" method="GET">
+                            <input type="text" name="q" placeholder="Cari berita... (XSS)">
+                            <button type="submit">Cari</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="main-content">
+                <div class="left-column">
+                    <!-- HEADLINE -->
+                    <div class="headline">
+                        <img src="https://images.unsplash.com/photo-1587293852726-70cdb0c3e0f6?w=800&h=450&fit=crop"
+                             alt="Berita utama"
+                             onerror="this.src='https://picsum.photos/id/20/800/450'">
+                        <div class="headline-content">
+                            <div class="headline-category">🔴 BREAKING NEWS</div>
+                            <h1>Presiden Resmikan Proyek Strategis Nasional Senilai Rp50 Triliun</h1>
+                            <p>Jakarta - Presiden hari ini meresmikan proyek infrastruktur terbesar yang menghubungkan tiga provinsi sekaligus. Proyek ini diperkirakan akan selesai pada 2027 dan menyerap 50.000 tenaga kerja lokal. Menteri PUPR menyatakan proyek ini akan meningkatkan konektivitas dan pertumbuhan ekonomi di kawasan timur Indonesia.</p>
+                            <div class="date" style="margin-top:15px">KOMPASrentan.com - 2 jam lalu</div>
+                        </div>
+                    </div>
+
+                    <!-- GRID BERITA LENGKAP -->
+                    <div class="article-grid">
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1529101091764-c3526daf3a7c?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/100/400/250'"
+                                 alt="Politik">
+                            <div class="article-card-content">
+                                <h3>Golkar dan PAN Resmi Bentuk Koalisi Menuju Pilkada Serentak 2025</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Ketua Umum kedua partai sepakat mengusung kader terbaik di 10 provinsi strategis. Koalisi ini diprediksi akan mengubah peta politik nasional menjelang pilkada serentak.</p>
+                                <div class="date">Politik • 3 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/26/400/250'"
+                                 alt="Ekonomi">
+                            <div class="article-card-content">
+                                <h3>IHSG Menguat Tipis di Tengah Sentimen Global yang Masih Bergejolak</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Indeks Harga Saham Gabungan ditutup naik 0.3% ke level 7.250. Sektor teknologi dan perbankan menjadi penopang utama di tengah ketidakpastian suku bunga global.</p>
+                                <div class="date">Ekonomi • 5 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/0/400/250'"
+                                 alt="Teknologi">
+                            <div class="article-card-content">
+                                <h3>Apple Resmi Luncurkan Vision Pro 2, Harga Mulai Rp50 Juta di Indonesia</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Perangkat realitas campuran terbaru Apple hadir dengan chip M3 dan layar micro-OLED 8K. Pre-order dibuka 15 Februari 2025 untuk pasar Indonesia.</p>
+                                <div class="date">Teknologi • 6 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1522778119026-d647f0598bf7?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/14/400/250'"
+                                 alt="Olahraga">
+                            <div class="article-card-content">
+                                <h3>Timnas Indonesia U-23 Lolos ke Piala Asia 2026, Shin Tae-yong: Ini Baru Awal</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Garuda Muda memastikan tiket setelah mengalahkan Vietnam 3-1 di laga pamungkas. Ini adalah sejarah pertama kali Timnas U-23 lolos ke putaran final Piala Asia.</p>
+                                <div class="date">Olahraga • 8 jam lalu</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BARIS BERITA KEDUA -->
+                    <div class="article-grid" style="margin-top:10px">
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/169/400/250'"
+                                 alt="Internasional">
+                            <div class="article-card-content">
+                                <h3>Krisis Pangan Global Ancam 50 Negara, PBB Segera Gelar KTT Darurat</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">FAO melaporkan harga pangan naik 30% dalam 6 bulan terakhir. KTT darurat akan digelar di Roma bulan depan untuk mencari solusi jangka pendek dan panjang.</p>
+                                <div class="date">Internasional • 10 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1581057398954-2b1b5a8b6a4b?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/116/400/250'"
+                                 alt="Kesehatan">
+                            <div class="article-card-content">
+                                <h3>Waspada Varian Baru COVID-19, Kemenkes Perketat Pintu Masuk</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Varian JN.1 terdeteksi di 5 negara Asia Tenggara. Pemerintah mewajibkan tes acak bagi pelancong internasional di bandara utama.</p>
+                                <div class="date">Kesehatan • 12 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/24/400/250'"
+                                 alt="Pendidikan">
+                            <div class="article-card-content">
+                                <h3>Kemendikbudristek Luncurkan Program Beasiswa Full ke Luar Negeri 2025</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0">Program Indonesia International Student Mobility Awards (IISMA) 2025 membuka 5.000 kuota ke 100 universitas top dunia. Pendaftaran dibuka Maret 2025.</p>
+                                <div class="date">Pendidikan • 14 jam lalu</div>
+                            </div>
+                        </div>
+                        <div class="article-card">
+                            <img src="https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?w=400&h=250&fit=crop"
+                                 onerror="this.src='https://picsum.photos/id/15/400/250'"
+                                 alt="Lingkungan">
+                            <div class="article-card-content">
+                                <h3>Hutan Amazon Alami Deforestasi Terendah dalam 10 Tahun Terakhir</h3>
+                                <p style="font-size:13px; color:#666; margin:8px 0>Data dari INPE menunjukkan penurunan deforestasi sebesar 45% dibanding tahun lalu. Kebijakan baru pemerintah Brasil dinilai berhasil menekan illegal logging.</p>
+                                <div class="date">Lingkungan • 16 jam lalu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar">
+                    <!-- TEKS SLIDE / CAROUSEL DI ATAS SIDEBAR -->
+                    <div class="breaking-news">
+                        <span class="label">⚡ BREAKING</span>
+                        <span class="slide-text">
+                            🔥 Pilkada Serentak 2025 resmi dimajukan ke Juni | 📈 IHSG tembus 7.300 poin | ⚽ Timnas U-23 vs Thailand malam ini | 💰 Bansos PKH tahap 2 cair pekan depan | 🌍 Gempa magnitudo 6.1 di Maluku Utara | 🚀 Starlink resmi beroperasi di Indonesia
+                        </span>
+                    </div>
+
+                    <!-- LOGIN FORM SQL INJECTION -->
+                    <div class="sidebar-widget">
+                        <h3>🔐 LOGIN ADMIN</h3>
+                        <div class="login-form">
+                            <form action="login.php" method="POST">
+                                <input type="text" name="username" placeholder="Username" autocomplete="off">
+                                <input type="password" name="password" placeholder="Password">
+                                <button type="submit">LOGIN</button>
+                            </form>
+                            <div class="vuln-badge">💀 SQL Injection: ' or '1'='1</div>
+                        </div>
+                    </div>
+
+                    <!-- BERITA POPULER -->
+                    <div class="sidebar-widget">
+                        <h3>📈 TERPOPULER</h3>
+                        <ul class="popular-news">
+                            <li><a href="#">1. 10 Artis Yang Paling Berpengaruh 2024</a></li>
+                            <li><a href="#">2. Cara Cek Bansos PKH Tahap 1 2024</a></li>
+                            <li><a href="#">3. Harga Emas Antam Turun Hari Ini</a></li>
+                            <li><a href="#">4. Sinopsis Drakor Queen of Tears Episode 12</a></li>
+                            <li><a href="#">5. Hasil BRI Liga 1: Persib Vs Persija</a></li>
+                            <li><a href="#">6. Jadwal Lengkap Piala Asia U-23 2026</a></li>
+                            <li><a href="#">7. Review Realme 12 Pro+ 5G: Kamera 200MP</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- KOMENTAR STORED XSS -->
+                    <div class="sidebar-widget">
+                        <h3>💬 KOMENTAR</h3>
+                        <div class="login-form">
+                            <form action="comment.php" method="POST">
+                                <input type="text" name="name" placeholder="Nama (bisa XSS)">
+                                <textarea name="comment" rows="3" placeholder="Komentar... (masukin script bebas)"></textarea>
+                                <button type="submit">KIRIM</button>
+                            </form>
+                        </div>
+                        <div id="comments-display">
+                            <div class="comment-item">
+                                <div class="comment-name">Alifdiaz</div>
+                                <div>Website keren buat belajar penetration testing!</div>
+                                <div class="date">1 jam lalu</div>
+                            </div>
+                            <div class="comment-item">
+                                <div class="comment-name">EthicalHacker</div>
+                                <div>Coba XSS: &lt;script&gt;alert('Hack')&lt;/script&gt;</div>
+                                <div class="date">3 jam lalu</div>
+                            </div>
+                            <div class="vuln-badge">💀 Stored XSS Active</div>
+                        </div>
+                    </div>
+
+                    <!-- PATH TRAVERSAL INFO -->
+                    <div class="sidebar-widget">
+                        <h3>🕸️ PATH TRAVERSAL</h3>
+                        <p>Coba akses: <code style="background:#f0f0f0; padding:2px 5px; border-radius:4px">?page=../../../../etc/passwd</code></p>
+                        <p>Atau: <code style="background:#f0f0f0; padding:2px 5px; border-radius:4px">?page=config/database</code></p>
+                        <div class="vuln-badge">🔥 LFI/RFI Vulnerability</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 KOMPASrentan - Portal Uji Penetrasi Testing & Ethical Hacking</p>
+            <p><strong>BY ALIFDIAZ</strong> — Untuk pembelajaran keamanan siber</p>
+            <p style="margin-top:15px; font-size:10px;">⚠️ Website ini sengaja dibuat rentan (SQLi, XSS, LFI, Upload Shell) untuk kebutuhan edukasi ⚠️</p>
+        </footer>
     </div>
 
-    <footer>
-        &copy; 2025 KOMPASrentan - Portal Uji Penetrasi Testing<br>
-        Dibuat oleh SHINRA TENSEI - DARK MEDIA | BOT BY ANGGA GANTENG ACUUU
-    </footer>
+    <script>
+        console.log("🔥 PORTAL UJI HACK AKTIF - BY ALIFDIAZ 🔥");
+        console.log("Kerentanan: SQL Injection, XSS Reflected & Stored, Path Traversal, Upload Shell");
+        console.log("Selamat belajar hacking secara etis!");
+    </script>
 </body>
 </html>
